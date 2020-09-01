@@ -1,4 +1,3 @@
-![cc-in-out](/logo.png)
 # cookie-consent (cc-in-out)
 A plain js lightweight cookie banner with opt-in and opt-out API. Groups of cookies can be defined and be selected by the user and only approved groups
 will fire their specific code such as for Google or Facebook tracking.
