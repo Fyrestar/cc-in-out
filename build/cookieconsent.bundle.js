@@ -2,38 +2,6 @@
 
 function CookieConsent(options) {
 
-	/*
- 
- cookieconsent-opt-in
- 
- A plain js lightweight cookie banner with opt-in and opt-out API. Groups of cookies can be defined and be selected by the user and only approved groups
- will fire their specific code such as for Google or Facebook tracking.
- 
- A Group can be set as required (checkbox disabled) and selected by default. Buttons to either allow cookies (all) or only use the selection
- are shown, another button to reject all non-required can be used as well.
- 
- Features
- 
- - Multi-language
- - Opt-in: groups of cookies with detailed description for each group and cookies.
- - Opt-out: specify a element ID for a links that will opt-out a group. (links usually placed in the privacy policies)
- - Ask again on changes: option to ask for consent again when new cookies or groups are added, this can be reduced to groups only, i recommend ask again on any change for full transparency. New or changed groups and cookies are highlighted.
- - Buttons for allow, limit and only necessary can be used.
- - Custom CSS string or null to only use a external style file
- 
- Disclaimer: i'm not giving legal advice, please consult a lawyer for legal information
- 
- As of current state only a opt-in dialog conforms DSGVO for marketing tracking, most of all users wouldn't take
- effort to opt-in to be tracked, it is unlikely that explcitly clicking a checkbox would be ever required as this
- would make tracking useless. So the best way seems to be pre-selecting the cookie groups you really need.
- 
- In most of all cases users are annoyed by any type of cookie banner and won't read nor care for any options, so
- an "Allow" and "Limit" button should give the best results. The DSGVO states the user must have an option to decide,
- not that it has to be more easy to disabled tracking.
- 
- 
- */
-
 	function flushCookies() {
 
 		var cookies = document.cookie.split(";");
