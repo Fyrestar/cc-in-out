@@ -195,8 +195,6 @@ Build ES5 bundle with babel and minify with closure compiler.
 $ npm run build
 ```
 
-*Disclaimer: i'm not providing legal advice (please consult a lawyer for legal information) nor taking any responsibility for errors or legal issues*
-
 ## Notes about cookie consent
 
 
@@ -207,3 +205,6 @@ would make tracking useless. So the best way seems to be pre-selecting the cooki
 In most of all cases users are annoyed by any type of cookie banner and won't read or care for any options, so
 an "Allow" and "Limit" button should give the best results. The DSGVO states the user must have an option to decide,
 not that it has to be more easy to disabled tracking.
+
+
+*Disclaimer: i'm not providing legal advice (please consult a lawyer for legal information) nor taking any responsibility for errors or legal issues*
