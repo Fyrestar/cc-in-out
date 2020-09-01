@@ -1,6 +1,6 @@
 {
   "name": "cc-in-out",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "Cookie consent banner with opt-in/out and other features.",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,14 @@
     "build": "npm run bundle && java -jar node_modules/google-closure-compiler/compiler.jar --warning_level=VERBOSE --jscomp_off=globalThis --jscomp_off=checkTypes --language_in=ECMASCRIPT5_STRICT --js build/cookieconsent.bundle.js --js_output_file build/cookieconsent.min.js"
   },
   "author": "Fyrestar",
-  "license": "ISC",
+  "repository": "fyrestar/cc-in-out",
+  "license": "MIT",
+  "keywords": [
+    "cookie",
+    "consent",
+    "banner",
+    "dsgvo"
+  ],
   "devDependencies": {
     "@babel/cli": "^7.10.5",
     "@babel/core": "^7.10.5",

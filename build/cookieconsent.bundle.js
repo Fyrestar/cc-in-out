@@ -8,6 +8,18 @@ function CookieConsent(options) {
 
 	// https://github.com/Fyrestar/cookie-consent
 
+	var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+	function decode(string) {
+
+		return isSafari ? decodeURIComponent(string) : string;
+	}
+
+	function encode(string) {
+
+		return isSafari ? encodeURIComponent(string) : string;
+	}
+
 	function flushCookies() {
 
 		var cookies = document.cookie.split(";");
@@ -29,7 +41,7 @@ function CookieConsent(options) {
 				c = c.substring(1);
 			}
 			if (c.indexOf(name) === 0) {
-				return decodeURIComponent(c.substring(name.length, c.length));
+				return decode(c.substring(name.length, c.length));
 			}
 		}
 		return "";
@@ -39,7 +51,7 @@ function CookieConsent(options) {
 		var d = new Date();
 		d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
 		var expires = "expires=" + d.toUTCString();
-		document.cookie = cname + "=" + encodeURIComponent(cvalue) + ";" + expires + ";path=/";
+		document.cookie = cname + "=" + encode(cvalue) + ";" + expires + ";path=/";
 	}
 
 	var settings = void 0,
