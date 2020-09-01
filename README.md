@@ -17,14 +17,6 @@ are shown, another button to reject all non-required can be used as well.
 ![cc-in-out](/ccinout-changes.png)
 
 
-## Build
-
-Build ES5 bundle with babel and minify with closure compiler.
-
-```
-$ npm run build
-```
-
 ## Features
 
 - Multi-language
@@ -193,6 +185,14 @@ consent.feedback( 'GAC', function( allowed ) {
 	document.body.appendChild( text );
 
 });
+```
+
+## Build
+
+Build ES5 bundle with babel and minify with closure compiler.
+
+```
+$ npm run build
 ```
 
 ## Notes about cookie consent
