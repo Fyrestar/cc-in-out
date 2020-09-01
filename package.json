@@ -1,0 +1,22 @@
+{
+  "name": "cc-in-out",
+  "version": "1.0.0",
+  "description": "Cookie consent banner with opt-in/out and other features.",
+  "main": "index.js",
+  "scripts": {
+    "bundle": "babel --presets es2015 index.js -o build/cookieconsent.bundle.js",
+    "build": "npm run bundle && java -jar node_modules/google-closure-compiler/compiler.jar --warning_level=VERBOSE --jscomp_off=globalThis --jscomp_off=checkTypes --language_in=ECMASCRIPT5_STRICT --js build/cookieconsent.bundle.js --js_output_file build/cookieconsent.min.js"
+  },
+  "author": "Fyrestar",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.10.5",
+    "@babel/node": "^7.10.5",
+    "@babel/preset-env": "^7.10.4",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-es2015": "^6.24.1",
+    "google-closure-compiler": "^20170521.0.0"
+  }
+}

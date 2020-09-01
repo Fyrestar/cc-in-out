@@ -1,0 +1,4 @@
+{
+    "regenerator": false,
+    presets: ["@babel/preset-env"]
+}
