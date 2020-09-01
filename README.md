@@ -195,9 +195,10 @@ Build ES5 bundle with babel and minify with closure compiler.
 $ npm run build
 ```
 
+*Disclaimer: i'm not providing legal advice (please consult a lawyer for legal information) nor taking any responsibility for errors or legal issues*
+
 ## Notes about cookie consent
 
-*Disclaimer: i'm not providing legal advice, please consult a lawyer for legal information*
 
 As of current state a opt-in dialog conforms DSGVO for marketing tracking *including Google Analytics*, most of all users wouldn't take
 effort to opt-in to be tracked, it is unlikely that explicitly enabling a checkbox would be ever required as this
