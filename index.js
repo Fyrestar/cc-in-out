@@ -1,11 +1,25 @@
 /**
- * @author Fyrestar <mevedia.com>
+ * @author Fyrestar <info@mevedia.com>
  */
 
 function CookieConsent( options ) {
 
 	// https://github.com/Fyrestar/cookie-consent
-	
+
+	const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+	function decode( string ) {
+
+		return isSafari ? decodeURIComponent( string ) : string;
+
+	}
+
+	function encode( string ) {
+
+		return isSafari ? encodeURIComponent( string ) : string;
+
+	}
+
 	function flushCookies() {
 
 		const cookies = document.cookie.split( ";" );
@@ -28,7 +42,7 @@ function CookieConsent( options ) {
 				c = c.substring( 1 );
 			}
 			if ( c.indexOf( name ) === 0 ) {
-				return c.substring( name.length, c.length );
+				return decode( c.substring( name.length, c.length ) );
 			}
 		}
 		return "";
@@ -38,7 +52,7 @@ function CookieConsent( options ) {
 		let d = new Date();
 		d.setTime( d.getTime() + ( exdays * 24 * 60 * 60 * 1000 ) );
 		let expires = "expires=" + d.toUTCString();
-		document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+		document.cookie = cname + "=" + encode(cvalue) + ";" + expires + ";path=/";
 	}
 
 
@@ -378,6 +392,7 @@ function CookieConsent( options ) {
 
 		settings,
 
+		flushCookies,
 		getCookie,
 		setCookie,
 
