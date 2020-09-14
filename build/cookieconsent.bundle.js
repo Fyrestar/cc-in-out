@@ -10,6 +10,11 @@ function CookieConsent(options) {
 
 	var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
+	var settings = void 0,
+	    hasChanged = false;
+
+	var cookies = {};
+
 	function decode(string) {
 
 		return isSafari ? decodeURIComponent(string) : string;
@@ -54,10 +59,19 @@ function CookieConsent(options) {
 		document.cookie = cname + "=" + encode(cvalue) + ";" + expires + ";path=/";
 	}
 
-	var settings = void 0,
-	    hasChanged = false;
+	function addScript(url, async) {
 
-	var cookies = {};
+		var e = document.createElement("script");
+
+		if (async) e.setAttribute("async", "async");
+
+		e.setAttribute("type", "text/javascript");
+		e.setAttribute("src", url);
+
+		document.head.appendChild(e);
+
+		return e;
+	}
 
 	function getSettings() {
 
@@ -219,9 +233,17 @@ function CookieConsent(options) {
 
 					var allowed = _group.accepted && _cookie.accepted !== false;
 
-					if (allowed && _cookie.mount instanceof Function) {
+					if (allowed) {
 
-						_cookie.mount();
+						if (_cookie.scripts instanceof Array) {
+
+							for (var _i3 = 0, _l2 = _cookie.scripts.length; _i3 < _l2; _i3++) {
+
+								addScript(_cookie.scripts[_i3]);
+							}
+						}
+
+						if (_cookie.mount instanceof Function) _cookie.mount();
 					} else if (_cookie.denied instanceof Function) {
 
 						_cookie.denied();
@@ -242,8 +264,8 @@ function CookieConsent(options) {
 
 						var callbacks = cookies[_cookie2.id];
 
-						for (var _i3 = 0, _l2 = callbacks.length; _i3 < _l2; _i3++) {
-							callbacks[_i3](_allowed);
+						for (var _i4 = 0, _l3 = callbacks.length; _i4 < _l3; _i4++) {
+							callbacks[_i4](_allowed);
 						}
 					} else {
 
@@ -276,15 +298,15 @@ function CookieConsent(options) {
 							});
 						}
 
-						for (var _i4 = 0, _l3 = options.groups.length; _i4 < _l3; _i4++) {
+						for (var _i5 = 0, _l4 = options.groups.length; _i5 < _l4; _i5++) {
 
-							var _group3 = options.groups[_i4];
+							var _group3 = options.groups[_i5];
 
 							var _groupState = settings.groups[_group3.name];
 
-							for (var _i5 = 0, _l4 = _group3.cookies.length; _i5 < _l4; _i5++) {
+							for (var _i6 = 0, _l5 = _group3.cookies.length; _i6 < _l5; _i6++) {
 
-								var _cookie3 = _group3.cookies[_i5];
+								var _cookie3 = _group3.cookies[_i6];
 
 								if (_cookie3.optoutElement) {
 									(function () {
@@ -329,6 +351,7 @@ function CookieConsent(options) {
 		flushCookies: flushCookies,
 		getCookie: getCookie,
 		setCookie: setCookie,
+		addScript: addScript,
 
 		feedback: function feedback(id, callback) {
 
@@ -474,9 +497,9 @@ function CookieConsent(options) {
 
 		// Render actions
 
-		for (var _i6 = 0, _l5 = actions.length; _i6 < _l5; _i6++) {
+		for (var _i7 = 0, _l6 = actions.length; _i7 < _l6; _i7++) {
 
-			var action = actions[_i6];
+			var action = actions[_i7];
 
 			var $action = wrap('<button class="cc-action"></button>');
 			$action.textContent = t(action.label);
@@ -517,9 +540,9 @@ function CookieConsent(options) {
 
 		function showGroup(name) {
 
-			for (var _i7 = 0, _l6 = options.groups.length; _i7 < _l6; _i7++) {
+			for (var _i8 = 0, _l7 = options.groups.length; _i8 < _l7; _i8++) {
 
-				var group = options.groups[_i7];
+				var group = options.groups[_i8];
 
 				if (group.name === name) {
 
@@ -537,9 +560,9 @@ function CookieConsent(options) {
 			}
 		}
 
-		for (var _i8 = 0, _l7 = options.groups.length; _i8 < _l7; _i8++) {
+		for (var _i9 = 0, _l8 = options.groups.length; _i9 < _l8; _i9++) {
 
-			var group = options.groups[_i8];
+			var group = options.groups[_i9];
 
 			var $gh = wrap("<div class=\"cc-tab\"><input type=\"checkbox\" /><div tab=\"" + group.name + "\">" + group.label + " (" + group.cookies.length + ")</div></div>");
 			var $gc = $gh.firstChild;
@@ -556,9 +579,9 @@ function CookieConsent(options) {
 
 			var html = "<div>" + group.purpose + "<table class=\"cc-table\"><thead><tr><td>" + t("name") + "</td><td>" + t("provider") + "</td><td>" + t("purpose") + "</td><td>" + t("expiration") + "</td><td>" + t("type") + "</td></tr></thead><tbody>";
 
-			for (var _i9 = 0, _l8 = group.cookies.length; _i9 < _l8; _i9++) {
+			for (var _i10 = 0, _l9 = group.cookies.length; _i10 < _l9; _i10++) {
 
-				var cookie = group.cookies[_i9];
+				var cookie = group.cookies[_i10];
 
 				var expires = '';
 

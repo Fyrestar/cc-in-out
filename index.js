@@ -8,6 +8,11 @@ function CookieConsent( options ) {
 
 	const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
+	let settings, hasChanged = false;
+
+	const cookies = {};
+
+
 	function decode( string ) {
 
 		return isSafari ? decodeURIComponent( string ) : string;
@@ -55,10 +60,21 @@ function CookieConsent( options ) {
 		document.cookie = cname + "=" + encode(cvalue) + ";" + expires + ";path=/";
 	}
 
+	function addScript( url, async ) {
 
-	let settings, hasChanged = false;
+		const e = document.createElement( "script" );
 
-	const cookies = {};
+		if ( async ) e.setAttribute( "async", "async" );
+
+		e.setAttribute( "type", "text/javascript" );
+		e.setAttribute( "src", url );
+
+		document.head.appendChild( e );
+
+		return e;
+
+	}
+
 
 	function getSettings() {
 
@@ -252,9 +268,22 @@ function CookieConsent( options ) {
 
 					const allowed = ( group.accepted && cookie.accepted !== false );
 
-					if ( allowed && cookie.mount instanceof Function ) {
 
-						cookie.mount();
+					if ( allowed ) {
+
+						if ( cookie.scripts instanceof Array ) {
+
+							for ( let i = 0, l = cookie.scripts.length; i < l; i ++ ) {
+
+								addScript( cookie.scripts[ i ] );
+
+							}
+
+						}
+
+						if ( cookie.mount instanceof Function  )
+							cookie.mount();
+
 
 					} else if ( cookie.denied instanceof Function ) {
 
@@ -395,6 +424,7 @@ function CookieConsent( options ) {
 		flushCookies,
 		getCookie,
 		setCookie,
+		addScript,
 
 		feedback: function ( id, callback ) {
 
