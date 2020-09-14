@@ -23,6 +23,7 @@ are shown, another button to reject all non-required can be used as well.
 - Opt-in: groups of cookies with detailed description for each group and cookies.
 - Opt-out: specify a element ID for a links that will opt-out a group. (links usually placed in the privacy policies)
 - List of script URLs per cookie can be defined which will be loaded when consent is given
+- Feedback listener can be set anytime to wait for consent (such as conversion callbacks)
 - Allow reset consent to flush all cookies of the site (won't work for HttpOnly or with path set)
 - Ask again on changes: option to ask for consent again when new cookies or groups are added, this can be reduced to groups only, i recommend ask again on any change for full transparency. New or changed groups and cookies are highlighted.
 - Buttons for allow, limit and only necessary can be used.
