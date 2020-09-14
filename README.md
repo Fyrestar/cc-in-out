@@ -22,12 +22,14 @@ are shown, another button to reject all non-required can be used as well.
 - Multi-language
 - Opt-in: groups of cookies with detailed description for each group and cookies.
 - Opt-out: specify a element ID for a links that will opt-out a group. (links usually placed in the privacy policies)
+- List of script URLs per cookie can be defined which will be loaded when consent is given
 - Allow reset consent to flush all cookies of the site (won't work for HttpOnly or with path set)
 - Ask again on changes: option to ask for consent again when new cookies or groups are added, this can be reduced to groups only, i recommend ask again on any change for full transparency. New or changed groups and cookies are highlighted.
 - Buttons for allow, limit and only necessary can be used.
 - Custom CSS string or null to only use a external style file
 - Multiple consent callbacks on cookies can be used across scripts
 - Responsive without js hacking
+
 
 Tested with major browsers and IE 11, improving support for older browsers but unsupported browsers aren't legally a requirement anymore.
 
