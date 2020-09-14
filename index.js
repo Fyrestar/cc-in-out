@@ -53,11 +53,11 @@ function CookieConsent( options ) {
 		return "";
 	}
 
-	function setCookie( cname, cvalue, exdays ) {
+	function setCookie( cname, cvalue, exdays, domain ) {
 		let d = new Date();
 		d.setTime( d.getTime() + ( exdays * 24 * 60 * 60 * 1000 ) );
 		let expires = "expires=" + d.toUTCString();
-		document.cookie = cname + "=" + encode(cvalue) + ";" + expires + ";path=/";
+		document.cookie = cname + "=" + encode(cvalue) + ";" + expires + ";path=/" + ( domain ? ";domain=" + domain : "" );
 	}
 
 	function addScript( url, async ) {
@@ -91,7 +91,7 @@ function CookieConsent( options ) {
 
 	function setSettings( object ) {
 
-		setCookie( options.cookieName, JSON.stringify( object ), options.expiresInDays || 365 );
+		setCookie( options.cookieName, JSON.stringify( object ), options.expiresInDays || 365, options.domain );
 
 	}
 
