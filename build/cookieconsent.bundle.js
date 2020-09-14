@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * @author Fyrestar <mevedia.com>
+ * @author Fyrestar <info@mevedia.com>
  */
 
 function CookieConsent(options) {
@@ -384,210 +384,224 @@ function CookieConsent(options) {
 		element.addEventListener('touchend', cb);
 	}
 
-	var style = options.style || "\n\n\t\t.cc-container {\n\t\t\tdisplay: flex;\n\t\t\tflex-direction: column;\n\t\t\talign-items: center;\n\t\t\tposition: absolute;\n\t\t\tleft: 0;right:\n\t\t\t0;bottom: 0;\n\t\t\tbackground-color: #edededb0;\n\t\t\tz-index: 10000;\n\t\t\tpadding: 1em;\n\t\t\tborder-top: 3px solid #292929;\n\t\t\tbackdrop-filter: blur(3px);\n\t\t\tmax-height: 100vh;\n\t\t\toverflow-y: scroll;\n\t\t}\n\t\t.cc-container > :first-child {\n\t\t\tdisplay: flex;\n\t\t\tmax-width: 100%;\n\t\t\twidth: 80vh;\n\t\t}\n\t\t.cc-new {\n\t\t\tbox-shadow: inset 0 0 0 3px orange;\n\t\t}\n\t\t.cc-tab {\n\t\t\t-webkit-user-select: none;\n\t\t\t-ms-user-select: none;\n\t\t\tuser-select: none;\n\t\t\tcursor: pointer;\n\t\t\tdisplay: flex;\n\t\t\talign-items: center;\n\t\t\tbackground-color: #d7d7d7;\n\t\t\tmargin: 4px;\n\t\t\tpadding: 0 4px;\n\t\t}\n\t\t.cc-tab[active=\"true\"] {\n\t\t\tbackground-color: white;\n\t\t}\n\t\t.cc-tab > * {\n\t\t\tmargin: 4px;\n\t\t\twhite-space: nowrap;\n\t\t}\n\n\t\t.cc-table {\n\t\t\tmargin-top: 10px;\n\t\t\ttable-layout: fixed;\n\t\t\twidth: 100%;\n\t\t    font-size: 80%;\n\t\t}\n\t\t.cc-table thead {\n\t\t\tfont-weight: bold;\n\t\t}\n\t\t.cc-table > tbody > tr > td {\n\t\t\tborder-top: 1px solid gray;\n\t\t}\n\t\t.cc-table td:not(:last-child) {\n\t\t\tborder-right: 1px solid gray;\n\t\t}\n\t\t.cc-table td {\n\t\t\tpadding: 4px;\n\t\t\tword-wrap: break-word;\n\t\t}\n\t\t.cc-actions {\n\t\t\tdisplay: flex;\n\t\t\tflex-wrap: wrap;\n\t\t}\n\t\t.cc-details {\n\t\t\tdisplay:flex;\n\t\t\theight: 25vh;\n\t\t\twidth: 50vw;\n\t\t\tflex-direction: column;\n\t\t\twidth: 80vh;\n\t\t\tmax-width: 90vw;\n\t\t\toverflow: auto;\n\t\t}\n\t\t.cc-details > div {\n\t\t\tmargin: 5px;\n\t\t\tdisplay: flex;\n\t\t}\n\t\t.cc-action {\n\t\t\t-webkit-user-select: none;\n\t\t\t-ms-user-select: none;\n\t\t\tuser-select: none;\n\t\t\twhite-space: nowrap;\n\t\t\tborder: 2px solid gray;\n\t\t\tbackground-color: gray;\n\t\t\tcolor: white;\n\t\t\tfont-weight: bold;\n\t\t\tpadding: .5em 1em;\n\t\t\tmargin: 10px;\n\t\t\tflex-grow: 1;\n\t\t\talign-self: center;\n\t\t\tcursor: pointer;\n\t\t}\n\t\t.cc-action-settings {\n\t\t\t-webkit-user-select: none;\n\t\t\t-ms-user-select: none;\n\t\t\tuser-select: none;\n\t\t\tdisplay: table;\n\t\t\tcursor: pointer;\n\t\t\tpadding: 4px 6px;\n\t\t\tmargin-top: 10px;\n\t\t\tborder: 1px solid;\n\t\t\twidth: fit-content;\n\t\t\tfont-size: 90%;\n\t\t}\n\t\t.cc-action-settings[active=\"true\"] {\n\t\t\tbackground-color: white;\n\t\t}\n\t\t.cc-primary {\n\t\t\tbackground-color: green;\n\t\t}\n\t\t.cc-message {\n\t\t\tpadding: 0 20px;\n\t\t\tfont-size: 90%;\n\t\t}\n\t\t.cc-changed {\n\t\t\tpadding: 4px;\n\t\t\tcolor: white;\n\t\t\tbackground-color: orange;\n\t\t\ttext-align: center;\n\t\t}\n\t\t@media only screen and (max-width: 600px) {\n\t\t\t.cc-container > div {\n\t\t\t\tflex-wrap: wrap;\n\t\t\t}\n\t\t\t.cc-table {\n\t\t\t\ttable-layout: auto;\n\t\t\t\twidth: 100%;\n\t\t\t}\n\t\t}\n\t";
+	function execute() {
 
-	if (options.extraStyle) style += options.extraStyle;
+		var style = options.style || "\n\n\t\t.cc-container {\n\t\t\tdisplay: flex;\n\t\t\tflex-direction: column;\n\t\t\talign-items: center;\n\t\t\tposition: absolute;\n\t\t\tleft: 0;right:\n\t\t\t0;bottom: 0;\n\t\t\tbackground-color: #edededb0;\n\t\t\tz-index: 10000;\n\t\t\tpadding: 1em;\n\t\t\tborder-top: 3px solid #292929;\n\t\t\tbackdrop-filter: blur(3px);\n\t\t\tmax-height: 100vh;\n\t\t\toverflow-y: scroll;\n\t\t}\n\t\t.cc-container > :first-child {\n\t\t\tdisplay: flex;\n\t\t\tmax-width: 100%;\n\t\t\twidth: 80vh;\n\t\t}\n\t\t.cc-new {\n\t\t\tbox-shadow: inset 0 0 0 3px orange;\n\t\t}\n\t\t.cc-tab {\n\t\t\t-webkit-user-select: none;\n\t\t\t-ms-user-select: none;\n\t\t\tuser-select: none;\n\t\t\tcursor: pointer;\n\t\t\tdisplay: flex;\n\t\t\talign-items: center;\n\t\t\tbackground-color: #d7d7d7;\n\t\t\tmargin: 4px;\n\t\t\tpadding: 0 4px;\n\t\t}\n\t\t.cc-tab[active=\"true\"] {\n\t\t\tbackground-color: white;\n\t\t}\n\t\t.cc-tab > * {\n\t\t\tmargin: 4px;\n\t\t\twhite-space: nowrap;\n\t\t}\n\n\t\t.cc-table {\n\t\t\tmargin-top: 10px;\n\t\t\ttable-layout: fixed;\n\t\t\twidth: 100%;\n\t\t    font-size: 80%;\n\t\t}\n\t\t.cc-table thead {\n\t\t\tfont-weight: bold;\n\t\t}\n\t\t.cc-table > tbody > tr > td {\n\t\t\tborder-top: 1px solid gray;\n\t\t}\n\t\t.cc-table td:not(:last-child) {\n\t\t\tborder-right: 1px solid gray;\n\t\t}\n\t\t.cc-table td {\n\t\t\tpadding: 4px;\n\t\t\tword-wrap: break-word;\n\t\t}\n\t\t.cc-actions {\n\t\t\tdisplay: flex;\n\t\t\tflex-wrap: wrap;\n\t\t}\n\t\t.cc-details {\n\t\t\tdisplay:flex;\n\t\t\theight: 25vh;\n\t\t\twidth: 50vw;\n\t\t\tflex-direction: column;\n\t\t\twidth: 80vh;\n\t\t\tmax-width: 90vw;\n\t\t\toverflow: auto;\n\t\t}\n\t\t.cc-details > div {\n\t\t\tmargin: 5px;\n\t\t\tdisplay: flex;\n\t\t}\n\t\t.cc-action {\n\t\t\t-webkit-user-select: none;\n\t\t\t-ms-user-select: none;\n\t\t\tuser-select: none;\n\t\t\twhite-space: nowrap;\n\t\t\tborder: 2px solid gray;\n\t\t\tbackground-color: gray;\n\t\t\tcolor: white;\n\t\t\tfont-weight: bold;\n\t\t\tpadding: .5em 1em;\n\t\t\tmargin: 10px;\n\t\t\tflex-grow: 1;\n\t\t\talign-self: center;\n\t\t\tcursor: pointer;\n\t\t}\n\t\t.cc-action-settings {\n\t\t\t-webkit-user-select: none;\n\t\t\t-ms-user-select: none;\n\t\t\tuser-select: none;\n\t\t\tdisplay: table;\n\t\t\tcursor: pointer;\n\t\t\tpadding: 4px 6px;\n\t\t\tmargin-top: 10px;\n\t\t\tborder: 1px solid;\n\t\t\twidth: fit-content;\n\t\t\tfont-size: 90%;\n\t\t}\n\t\t.cc-action-settings[active=\"true\"] {\n\t\t\tbackground-color: white;\n\t\t}\n\t\t.cc-primary {\n\t\t\tbackground-color: green;\n\t\t}\n\t\t.cc-message {\n\t\t\tpadding: 0 20px;\n\t\t\tfont-size: 90%;\n\t\t}\n\t\t.cc-changed {\n\t\t\tpadding: 4px;\n\t\t\tcolor: white;\n\t\t\tbackground-color: orange;\n\t\t\ttext-align: center;\n\t\t}\n\t\t@media only screen and (max-width: 600px) {\n\t\t\t.cc-container > div {\n\t\t\t\tflex-wrap: wrap;\n\t\t\t}\n\t\t\t.cc-table {\n\t\t\t\ttable-layout: auto;\n\t\t\t\twidth: 100%;\n\t\t\t}\n\t\t}\n\t";
 
-	var overlayStyle = 'position: fixed; left: 0; right: 0; bottom: 0; z-index:9999;';
+		if (options.extraStyle) style += options.extraStyle;
 
-	if (options.overlayStyle) overlayStyle += options.overlayStyle;
+		var overlayStyle = 'position: fixed; left: 0; right: 0; bottom: 0; z-index:9999;';
 
-	var $style = wrap("<style>" + style + "</style>");
+		if (options.overlayStyle) overlayStyle += options.overlayStyle;
 
-	document.head.appendChild($style);
+		var $style = wrap("<style>" + style + "</style>");
 
-	var $overlay = wrap("<div style=\"" + overlayStyle + "\"><div class=\"cc-container\"><div><p class=\"cc-message\">" + t('message') + "</p><div class=\"cc-actions\"></div></div></div></div>");
-	var $container = $overlay.childNodes[0];
-	var $message = $container.firstChild.childNodes[0];
-	var $actions = $container.firstChild.childNodes[1];
+		document.head.appendChild($style);
 
-	if (hasChanged && options.text.changes) $message.innerHTML += t('changes');
+		var $overlay = wrap("<div style=\"" + overlayStyle + "\"><div class=\"cc-container\"><div><p class=\"cc-message\">" + t('message') + "</p><div class=\"cc-actions\"></div></div></div></div>");
+		var $container = $overlay.childNodes[0];
+		var $message = $container.firstChild.childNodes[0];
+		var $actions = $container.firstChild.childNodes[1];
 
-	// Apply and save settings
+		if (hasChanged && options.text.changes) $message.innerHTML += t('changes');
 
-	function apply(allowAll) {
+		// Apply and save settings
 
-		var settings = {
-			accepted: true,
-			groups: {}
+		function apply(allowAll) {
+
+			var settings = {
+				accepted: true,
+				groups: {}
+			};
+
+			for (var i = 0, l = options.groups.length; i < l; i++) {
+
+				var group = options.groups[i];
+
+				settings.groups[group.name] = {
+					accepted: allowAll === false ? group.required || false : allowAll || group.check.checked,
+					cookies: groupCookies(group, true) // Remember list of cookies stored
+				};
+			}
+
+			setSettings(settings);
+
+			// Delete dom elements
+
+			$overlay.parentNode.removeChild($overlay);
+			$style.parentNode.removeChild($style);
+
+			// Finish, don't compare for changes
+
+			mount(settings, false);
+		}
+
+		// Use desired buttons
+
+		var Actions = {
+			allowCookies: {
+				label: 'allowCookies',
+				primary: true,
+				call: function call() {
+
+					apply(true);
+				}
+			},
+			allowSelection: {
+				label: 'allowSelection',
+				call: function call() {
+
+					apply();
+				}
+			},
+			rejectCookies: {
+				label: 'rejectCookies',
+				call: function call() {
+
+					apply(false);
+				}
+			}
 		};
 
-		for (var i = 0, l = options.groups.length; i < l; i++) {
+		var actions = [];
 
-			var group = options.groups[i];
+		for (var i = 0, l = options.buttons.length; i < l; i++) {
 
-			settings.groups[group.name] = {
-				accepted: allowAll === false ? group.required || false : allowAll || group.check.checked,
-				cookies: groupCookies(group, true) // Remember list of cookies stored
-			};
+			var button = options.buttons[i];
+
+			if (Actions[button]) actions.push(Actions[button]);
 		}
 
-		setSettings(settings);
+		// Render actions
 
-		// Delete dom elements
+		for (var _i6 = 0, _l5 = actions.length; _i6 < _l5; _i6++) {
 
-		$overlay.parentNode.removeChild($overlay);
-		$style.parentNode.removeChild($style);
+			var action = actions[_i6];
 
-		// Finish, don't compare for changes
+			var $action = wrap('<button class="cc-action"></button>');
+			$action.textContent = t(action.label);
 
-		mount(settings, false);
-	}
+			if (action.className) $action.className += ' ' + action.className;
 
-	// Use desired buttons
+			if (action.primary) $action.className += ' cc-primary';
 
-	var Actions = {
-		allowCookies: {
-			label: 'allowCookies',
-			primary: true,
-			call: function call() {
+			touch($action, action.call);
 
-				apply(true);
-			}
-		},
-		allowSelection: {
-			label: 'allowSelection',
-			call: function call() {
-
-				apply();
-			}
-		},
-		rejectCookies: {
-			label: 'rejectCookies',
-			call: function call() {
-
-				apply(false);
-			}
-		}
-	};
-
-	var actions = [];
-
-	for (var i = 0, l = options.buttons.length; i < l; i++) {
-
-		var button = options.buttons[i];
-
-		if (Actions[button]) actions.push(Actions[button]);
-	}
-
-	// Render actions
-
-	for (var _i6 = 0, _l5 = actions.length; _i6 < _l5; _i6++) {
-
-		var action = actions[_i6];
-
-		var $action = wrap('<button class="cc-action"></button>');
-		$action.textContent = t(action.label);
-
-		if (action.className) $action.className += ' ' + action.className;
-
-		if (action.primary) $action.className += ' cc-primary';
-
-		touch($action, action.call);
-
-		$actions.appendChild($action);
-	}
-
-	// Render cookie groups
-
-	var $details = wrap("<div class=\"cc-action-settings\">" + t('details') + "</div>");
-	$message.appendChild($details);
-
-	if (hasChanged) $details.className += ' cc-new';
-
-	var $settings = wrap("<div></div>");
-	$settings.style.display = 'none';
-	$container.appendChild($settings);
-
-	var $table = wrap("<div class=\"cc-details\"><div></div><div></div></div>");
-	var $header = $table.children[0];
-	var $body = $table.children[1];
-
-	$settings.appendChild($table);
-
-	touch($details, function (e) {
-
-		var active = $settings.style.display === 'none';
-
-		$settings.style.display = active ? 'block' : 'none';
-		$details.setAttribute('active', active ? 'true' : 'false');
-	});
-
-	function showGroup(name) {
-
-		for (var _i7 = 0, _l6 = options.groups.length; _i7 < _l6; _i7++) {
-
-			var group = options.groups[_i7];
-
-			if (group.name === name) {
-
-				group.body.style.display = 'block';
-				group.header.setAttribute('active', 'true');
-
-				var newest = group.body.querySelector('.cc-new');
-
-				if (newest) newest.scrollIntoView();
-			} else {
-
-				group.body.style.display = 'none';
-				group.header.setAttribute('active', 'false');
-			}
-		}
-	}
-
-	for (var _i8 = 0, _l7 = options.groups.length; _i8 < _l7; _i8++) {
-
-		var group = options.groups[_i8];
-
-		var $gh = wrap("<div class=\"cc-tab\"><input type=\"checkbox\" /><div tab=\"" + group.name + "\">" + group.label + " (" + group.cookies.length + ")</div></div>");
-		var $gc = $gh.firstChild;
-		var $gl = $gh.lastChild;
-		$header.appendChild($gh);
-
-		if (group.isNew) $gh.className += ' cc-new';
-
-		if (group.default !== undefined) $gc.checked = group.default;
-
-		if (settings && settings.groups[group.name] && settings.groups[group.name].accepted) $gc.checked = true;
-
-		if (group.required) $gc.disabled = true;
-
-		var html = "<div>" + group.purpose + "<table class=\"cc-table\"><thead><tr><td>" + t("name") + "</td><td>" + t("provider") + "</td><td>" + t("purpose") + "</td><td>" + t("expiration") + "</td><td>" + t("type") + "</td></tr></thead><tbody>";
-
-		for (var _i9 = 0, _l8 = group.cookies.length; _i9 < _l8; _i9++) {
-
-			var cookie = group.cookies[_i9];
-
-			var expires = '';
-
-			if (cookie.expires.indexOf(' ') > -1) {
-
-				var tokens = cookie.expires.split(' ');
-
-				expires = tokens[0] + ' ' + t(tokens[1], tokens[0]);
-			}
-
-			html += "<tr" + (cookie.isNew ? ' class="cc-new"' : '') + "><td>" + cookie.name + "</td><td>" + cookie.provider + "</td><td>" + (cookie.purpose || group.label) + "</td><td>" + expires + "</td><td>" + (cookie.type || 'HTTP') + "</td></tr>";
+			$actions.appendChild($action);
 		}
 
-		html += '</tbody></table></div>';
+		// Render cookie groups
 
-		var $gb = wrap(html);
-		$body.appendChild($gb);
+		var $details = wrap("<div class=\"cc-action-settings\">" + t('details') + "</div>");
+		$message.appendChild($details);
 
-		group.header = $gh;
-		group.body = $gb;
-		group.check = $gc;
+		if (hasChanged) $details.className += ' cc-new';
 
-		touch($gl, function (e) {
+		var $settings = wrap("<div></div>");
+		$settings.style.display = 'none';
+		$container.appendChild($settings);
 
-			showGroup(e.target.getAttribute('tab'));
+		var $table = wrap("<div class=\"cc-details\"><div></div><div></div></div>");
+		var $header = $table.children[0];
+		var $body = $table.children[1];
+
+		$settings.appendChild($table);
+
+		touch($details, function (e) {
+
+			var active = $settings.style.display === 'none';
+
+			$settings.style.display = active ? 'block' : 'none';
+			$details.setAttribute('active', active ? 'true' : 'false');
 		});
+
+		function showGroup(name) {
+
+			for (var _i7 = 0, _l6 = options.groups.length; _i7 < _l6; _i7++) {
+
+				var group = options.groups[_i7];
+
+				if (group.name === name) {
+
+					group.body.style.display = 'block';
+					group.header.setAttribute('active', 'true');
+
+					var newest = group.body.querySelector('.cc-new');
+
+					if (newest) newest.scrollIntoView();
+				} else {
+
+					group.body.style.display = 'none';
+					group.header.setAttribute('active', 'false');
+				}
+			}
+		}
+
+		for (var _i8 = 0, _l7 = options.groups.length; _i8 < _l7; _i8++) {
+
+			var group = options.groups[_i8];
+
+			var $gh = wrap("<div class=\"cc-tab\"><input type=\"checkbox\" /><div tab=\"" + group.name + "\">" + group.label + " (" + group.cookies.length + ")</div></div>");
+			var $gc = $gh.firstChild;
+			var $gl = $gh.lastChild;
+			$header.appendChild($gh);
+
+			if (group.isNew) $gh.className += ' cc-new';
+
+			if (group.default !== undefined) $gc.checked = group.default;
+
+			if (settings && settings.groups[group.name] && settings.groups[group.name].accepted) $gc.checked = true;
+
+			if (group.required) $gc.disabled = true;
+
+			var html = "<div>" + group.purpose + "<table class=\"cc-table\"><thead><tr><td>" + t("name") + "</td><td>" + t("provider") + "</td><td>" + t("purpose") + "</td><td>" + t("expiration") + "</td><td>" + t("type") + "</td></tr></thead><tbody>";
+
+			for (var _i9 = 0, _l8 = group.cookies.length; _i9 < _l8; _i9++) {
+
+				var cookie = group.cookies[_i9];
+
+				var expires = '';
+
+				if (cookie.expires.indexOf(' ') > -1) {
+
+					var tokens = cookie.expires.split(' ');
+
+					expires = tokens[0] + ' ' + t(tokens[1], tokens[0]);
+				}
+
+				html += "<tr" + (cookie.isNew ? ' class="cc-new"' : '') + "><td>" + cookie.name + "</td><td>" + cookie.provider + "</td><td>" + (cookie.purpose || group.label) + "</td><td>" + expires + "</td><td>" + (cookie.type || 'HTTP') + "</td></tr>";
+			}
+
+			html += '</tbody></table></div>';
+
+			var $gb = wrap(html);
+			$body.appendChild($gb);
+
+			group.header = $gh;
+			group.body = $gb;
+			group.check = $gc;
+
+			touch($gl, function (e) {
+
+				showGroup(e.target.getAttribute('tab'));
+			});
+		}
+
+		showGroup(options.groups[0].name);
+
+		document.body.appendChild($overlay);
 	}
 
-	showGroup(options.groups[0].name);
+	if (!document.body) {
 
-	document.body.appendChild($overlay);
+		document.addEventListener('readystatechange', function (e) {
+
+			if (document.readyState === 'complete') execute();
+		});
+	} else {
+
+		execute();
+	}
 
 	return module;
 }

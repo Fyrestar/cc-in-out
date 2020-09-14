@@ -463,8 +463,9 @@ function CookieConsent( options ) {
 
 	}
 
+	function execute() {
 
-	let style = options.style || `
+		let style = options.style || `
 
 		.cc-container {
 			display: flex;
@@ -598,253 +599,271 @@ function CookieConsent( options ) {
 		}
 	`;
 
-	if ( options.extraStyle )
-		style += options.extraStyle;
+		if ( options.extraStyle )
+			style += options.extraStyle;
 
-	let overlayStyle = 'position: fixed; left: 0; right: 0; bottom: 0; z-index:9999;';
+		let overlayStyle = 'position: fixed; left: 0; right: 0; bottom: 0; z-index:9999;';
 
-	if ( options.overlayStyle )
-		overlayStyle += options.overlayStyle;
+		if ( options.overlayStyle )
+			overlayStyle += options.overlayStyle;
 
-	const $style = wrap( `<style>${style}</style>` );
+		const $style = wrap( `<style>${style}</style>` );
 
-	document.head.appendChild( $style );
+		document.head.appendChild( $style );
 
-	const $overlay = wrap( `<div style="${overlayStyle}"><div class="cc-container"><div><p class="cc-message">${ t( 'message' ) }</p><div class="cc-actions"></div></div></div></div>` );
-	const $container = $overlay.childNodes[ 0 ];
-	const $message = $container.firstChild.childNodes[ 0 ];
-	const $actions = $container.firstChild.childNodes[ 1 ];
+		const $overlay = wrap( `<div style="${overlayStyle}"><div class="cc-container"><div><p class="cc-message">${ t( 'message' ) }</p><div class="cc-actions"></div></div></div></div>` );
+		const $container = $overlay.childNodes[ 0 ];
+		const $message = $container.firstChild.childNodes[ 0 ];
+		const $actions = $container.firstChild.childNodes[ 1 ];
 
-	if ( hasChanged && options.text.changes )
-		$message.innerHTML += t( 'changes' );
+		if ( hasChanged && options.text.changes )
+			$message.innerHTML += t( 'changes' );
 
 
-	// Apply and save settings
+		// Apply and save settings
 
-	function apply( allowAll ) {
+		function apply( allowAll ) {
 
-		const settings = {
-			accepted: true,
-			groups: {}
-		};
-
-		for ( let i = 0, l = options.groups.length; i < l; i++ ) {
-
-			const group = options.groups[ i ];
-
-			settings.groups[ group.name ] = {
-				accepted: allowAll === false ? ( group.required || false ) : ( allowAll || group.check.checked ),
-				cookies: groupCookies( group, true ) // Remember list of cookies stored
+			const settings = {
+				accepted: true,
+				groups: {}
 			};
 
-		}
+			for ( let i = 0, l = options.groups.length; i < l; i++ ) {
 
+				const group = options.groups[ i ];
 
-		setSettings( settings );
-
-		// Delete dom elements
-
-		$overlay.parentNode.removeChild( $overlay );
-		$style.parentNode.removeChild( $style );
-
-
-		// Finish, don't compare for changes
-
-		mount( settings, false );
-
-	}
-
-
-	// Use desired buttons
-
-	const Actions = {
-		allowCookies: {
-			label: 'allowCookies',
-			primary: true,
-			call: function () {
-
-				apply( true );
+				settings.groups[ group.name ] = {
+					accepted: allowAll === false ? ( group.required || false ) : ( allowAll || group.check.checked ),
+					cookies: groupCookies( group, true ) // Remember list of cookies stored
+				};
 
 			}
-		},
-		allowSelection: {
-			label: 'allowSelection',
-			call: function () {
-
-				apply();
-
-			}
-		},
-		rejectCookies: {
-			label: 'rejectCookies',
-			call: function () {
 
 
-				apply( false );
+			setSettings( settings );
 
-			}
-		}
-	};
+			// Delete dom elements
 
-	const actions = [];
-
-	for ( let i = 0, l = options.buttons.length; i < l; i++ ) {
-
-		const button = options.buttons[ i ];
-
-		if ( Actions[ button ] )
-			actions.push( Actions[ button ] );
-
-	}
+			$overlay.parentNode.removeChild( $overlay );
+			$style.parentNode.removeChild( $style );
 
 
-	// Render actions
+			// Finish, don't compare for changes
 
-	for ( let i = 0, l = actions.length; i < l; i++ ) {
-
-		const action = actions[ i ];
-
-		const $action = wrap( '<button class="cc-action"></button>' );
-		$action.textContent = t( action.label );
-
-		if ( action.className )
-			$action.className += ' ' + action.className;
-
-		if ( action.primary )
-			$action.className += ' cc-primary';
-
-		touch( $action, action.call );
-
-		$actions.appendChild( $action );
-
-	}
-
-
-	// Render cookie groups
-
-	const $details = wrap( `<div class="cc-action-settings">${t( 'details' )}</div>` );
-	$message.appendChild( $details );
-
-	if ( hasChanged )
-		$details.className += ' cc-new';
-
-
-	const $settings = wrap( `<div></div>` );
-	$settings.style.display = 'none';
-	$container.appendChild( $settings );
-
-	const $table = wrap( `<div class="cc-details"><div></div><div></div></div>` );
-	const $header = $table.children[ 0 ];
-	const $body = $table.children[ 1 ];
-
-	$settings.appendChild( $table );
-
-	touch( $details, function ( e ) {
-
-		const active = $settings.style.display === 'none';
-
-		$settings.style.display = active ? 'block' : 'none';
-		$details.setAttribute( 'active', active ? 'true' : 'false' );
-
-	} );
-
-
-	function showGroup( name ) {
-
-
-		for ( let i = 0, l = options.groups.length; i < l; i++ ) {
-
-			const group = options.groups[ i ];
-
-			if ( group.name === name ) {
-
-				group.body.style.display = 'block';
-				group.header.setAttribute( 'active', 'true' );
-
-				const newest = group.body.querySelector( '.cc-new' );
-
-				if ( newest )
-					newest.scrollIntoView();
-
-			} else {
-
-				group.body.style.display = 'none';
-				group.header.setAttribute( 'active', 'false' );
-
-
-			}
+			mount( settings, false );
 
 		}
 
 
-	}
+		// Use desired buttons
 
-	for ( let i = 0, l = options.groups.length; i < l; i++ ) {
+		const Actions = {
+			allowCookies: {
+				label: 'allowCookies',
+				primary: true,
+				call: function () {
 
-		const group = options.groups[ i ];
+					apply( true );
 
-		const $gh = wrap( `<div class="cc-tab"><input type="checkbox" /><div tab="${group.name}">${group.label} (${group.cookies.length})</div></div>` );
-		const $gc = $gh.firstChild;
-		const $gl = $gh.lastChild;
-		$header.appendChild( $gh );
+				}
+			},
+			allowSelection: {
+				label: 'allowSelection',
+				call: function () {
 
-		if ( group.isNew )
-			$gh.className += ' cc-new';
+					apply();
 
-		if ( group.default !== undefined )
-			$gc.checked = group.default;
-
-		if ( settings && settings.groups[ group.name ] && settings.groups[ group.name ].accepted )
-			$gc.checked = true;
-
-
-		if ( group.required )
-			$gc.disabled = true;
+				}
+			},
+			rejectCookies: {
+				label: 'rejectCookies',
+				call: function () {
 
 
-		let html = `<div>${group.purpose}<table class="cc-table"><thead><tr><td>${t( "name" )}</td><td>${t( "provider" )}</td><td>${t( "purpose" )}</td><td>${t( "expiration" )}</td><td>${t( "type" )}</td></tr></thead><tbody>`;
+					apply( false );
 
-		for ( let i = 0, l = group.cookies.length; i < l; i++ ) {
-
-			const cookie = group.cookies[ i ];
-
-			let expires = '';
-
-			if ( cookie.expires.indexOf( ' ' ) > -1 ) {
-
-				const tokens = cookie.expires.split( ' ' );
-
-				expires = tokens[ 0 ] + ' ' + t( tokens[ 1 ], tokens[ 0 ] );
-
+				}
 			}
+		};
 
-			html += `<tr${ cookie.isNew ? ' class="cc-new"' : ''}><td>${cookie.name}</td><td>${cookie.provider}</td><td>${cookie.purpose || group.label}</td><td>${expires}</td><td>${cookie.type || 'HTTP'}</td></tr>`;
+		const actions = [];
+
+		for ( let i = 0, l = options.buttons.length; i < l; i++ ) {
+
+			const button = options.buttons[ i ];
+
+			if ( Actions[ button ] )
+				actions.push( Actions[ button ] );
 
 		}
 
-		html += '</tbody></table></div>';
+
+		// Render actions
+
+		for ( let i = 0, l = actions.length; i < l; i++ ) {
+
+			const action = actions[ i ];
+
+			const $action = wrap( '<button class="cc-action"></button>' );
+			$action.textContent = t( action.label );
+
+			if ( action.className )
+				$action.className += ' ' + action.className;
+
+			if ( action.primary )
+				$action.className += ' cc-primary';
+
+			touch( $action, action.call );
+
+			$actions.appendChild( $action );
+
+		}
 
 
-		const $gb = wrap( html );
-		$body.appendChild( $gb );
+		// Render cookie groups
 
-		group.header = $gh;
-		group.body = $gb;
-		group.check = $gc;
+		const $details = wrap( `<div class="cc-action-settings">${t( 'details' )}</div>` );
+		$message.appendChild( $details );
+
+		if ( hasChanged )
+			$details.className += ' cc-new';
 
 
-		touch( $gl, function ( e ) {
+		const $settings = wrap( `<div></div>` );
+		$settings.style.display = 'none';
+		$container.appendChild( $settings );
 
-			showGroup( e.target.getAttribute( 'tab' ) );
+		const $table = wrap( `<div class="cc-details"><div></div><div></div></div>` );
+		const $header = $table.children[ 0 ];
+		const $body = $table.children[ 1 ];
+
+		$settings.appendChild( $table );
+
+		touch( $details, function ( e ) {
+
+			const active = $settings.style.display === 'none';
+
+			$settings.style.display = active ? 'block' : 'none';
+			$details.setAttribute( 'active', active ? 'true' : 'false' );
 
 		} );
 
+
+		function showGroup( name ) {
+
+
+			for ( let i = 0, l = options.groups.length; i < l; i++ ) {
+
+				const group = options.groups[ i ];
+
+				if ( group.name === name ) {
+
+					group.body.style.display = 'block';
+					group.header.setAttribute( 'active', 'true' );
+
+					const newest = group.body.querySelector( '.cc-new' );
+
+					if ( newest )
+						newest.scrollIntoView();
+
+				} else {
+
+					group.body.style.display = 'none';
+					group.header.setAttribute( 'active', 'false' );
+
+
+				}
+
+			}
+
+
+		}
+
+		for ( let i = 0, l = options.groups.length; i < l; i++ ) {
+
+			const group = options.groups[ i ];
+
+			const $gh = wrap( `<div class="cc-tab"><input type="checkbox" /><div tab="${group.name}">${group.label} (${group.cookies.length})</div></div>` );
+			const $gc = $gh.firstChild;
+			const $gl = $gh.lastChild;
+			$header.appendChild( $gh );
+
+			if ( group.isNew )
+				$gh.className += ' cc-new';
+
+			if ( group.default !== undefined )
+				$gc.checked = group.default;
+
+			if ( settings && settings.groups[ group.name ] && settings.groups[ group.name ].accepted )
+				$gc.checked = true;
+
+
+			if ( group.required )
+				$gc.disabled = true;
+
+
+			let html = `<div>${group.purpose}<table class="cc-table"><thead><tr><td>${t( "name" )}</td><td>${t( "provider" )}</td><td>${t( "purpose" )}</td><td>${t( "expiration" )}</td><td>${t( "type" )}</td></tr></thead><tbody>`;
+
+			for ( let i = 0, l = group.cookies.length; i < l; i++ ) {
+
+				const cookie = group.cookies[ i ];
+
+				let expires = '';
+
+				if ( cookie.expires.indexOf( ' ' ) > -1 ) {
+
+					const tokens = cookie.expires.split( ' ' );
+
+					expires = tokens[ 0 ] + ' ' + t( tokens[ 1 ], tokens[ 0 ] );
+
+				}
+
+				html += `<tr${ cookie.isNew ? ' class="cc-new"' : ''}><td>${cookie.name}</td><td>${cookie.provider}</td><td>${cookie.purpose || group.label}</td><td>${expires}</td><td>${cookie.type || 'HTTP'}</td></tr>`;
+
+			}
+
+			html += '</tbody></table></div>';
+
+
+			const $gb = wrap( html );
+			$body.appendChild( $gb );
+
+			group.header = $gh;
+			group.body = $gb;
+			group.check = $gc;
+
+
+			touch( $gl, function ( e ) {
+
+				showGroup( e.target.getAttribute( 'tab' ) );
+
+			} );
+
+		}
+
+		showGroup( options.groups[ 0 ].name );
+
+		document.body.appendChild( $overlay );
+
+
 	}
 
-	showGroup( options.groups[ 0 ].name );
 
-	document.body.appendChild( $overlay );
+	if ( !document.body ) {
 
+		document.addEventListener( 'readystatechange', function ( e ) {
+
+			if ( document.readyState === 'complete' )
+				execute();
+
+		} );
+
+	} else {
+
+		execute();
+
+	}
 
 	return module;
 
