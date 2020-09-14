@@ -30,6 +30,7 @@ are shown, another button to reject all non-required can be used as well.
 - Custom CSS string or null to only use a external style file
 - Multiple consent callbacks on cookies can be used across scripts
 - Responsive without js hacking
+- Domain can be defined to use across subdomains
 
 
 Tested with major browsers and IE 11, improving support for older browsers but unsupported browsers aren't legally a requirement anymore.
